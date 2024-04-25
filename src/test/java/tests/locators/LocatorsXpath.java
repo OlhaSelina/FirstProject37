@@ -1,4 +1,4 @@
-package tests;
+package tests.locators;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
@@ -37,7 +37,7 @@ public class LocatorsXpath {
     }
 
     @Test
-    public void testXpaht(){
+    public void testXpath(){
         /*
         /html/body//div[@class='column information']
         //div[@class='column information']

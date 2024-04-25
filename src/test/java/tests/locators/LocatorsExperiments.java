@@ -1,4 +1,4 @@
-package tests;
+package tests.locators;
 
 import org.testng.annotations.Test;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -7,14 +7,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testng.Assert;
 
 
 import java.time.Duration;
 import java.util.List;
-import java.util.Set;
+
 public class LocatorsExperiments {
     @Test
     public void testLocators1() {
