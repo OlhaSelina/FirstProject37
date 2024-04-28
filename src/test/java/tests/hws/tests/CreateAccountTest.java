@@ -6,6 +6,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import tests.hws.dto.UserDTO;
+import tests.hws.utils.DataProviders;
 
 import java.util.Random;
 
@@ -34,8 +35,18 @@ public class CreateAccountTest extends BaseTest{
         app.getUserHelper().newRegister(userDTO);
         app.getUserHelper().pause(3000);
 
-        String actualRes = app.getUserHelper().getEmailRegisterLinkText();
+        String actualRes = app.getUserHelper().getEmailRegisterLinkText(userDTO.getEmail());
         System.out.println(actualRes);
-        Assert.assertEquals(actualRes, firstName);
+        Assert.assertEquals(actualRes, email);
+    }
+
+    @Test(dataProvider = "createNewAccountCSVFile", dataProviderClass = DataProviders.class)
+
+    public void positiveCreateNewAccountCSV(UserDTO userDTO){
+        app.getUserHelper().clickLoginOnNavBar();
+        app.getUserHelper().newRegister(userDTO);
+        app.getUserHelper().pause(2000);
+
+        Assert.assertTrue(Boolean.parseBoolean(app.getUserHelper().getEmailRegisterLinkText(userDTO.getEmail())));
     }
 }

@@ -51,7 +51,7 @@ public class UserHelper extends BaseHelper{
         driver.findElement(By.xpath("//input[@name='register-button']")).click();
     }
 
-    public String getEmailRegisterLinkText() {
+    public String getEmailRegisterLinkText(String email) {
         return getTextBaseByLocator(emailRegisterLink);
     }
     //------------------------------
