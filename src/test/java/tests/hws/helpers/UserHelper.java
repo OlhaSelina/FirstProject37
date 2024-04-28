@@ -51,8 +51,12 @@ public class UserHelper extends BaseHelper{
         driver.findElement(By.xpath("//input[@name='register-button']")).click();
     }
 
-    public String getEmailRegisterLinkText(String email) {
+    public String getEmailRegisterLinkText() {
         return getTextBaseByLocator(emailRegisterLink);
+    }
+
+    public void navigateToHomePage(){
+        driver.navigate().to("https://demowebshop.tricentis.com/");
     }
     //------------------------------
     // Login-----------------

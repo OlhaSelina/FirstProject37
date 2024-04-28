@@ -14,6 +14,7 @@ public class CreateAccountTest extends BaseTest{
     @AfterMethod
     public void methodPostConditions(){
         app.getUserHelper().clickLogoutBtn();
+
     }
 
     @Test
@@ -35,18 +36,21 @@ public class CreateAccountTest extends BaseTest{
         app.getUserHelper().newRegister(userDTO);
         app.getUserHelper().pause(3000);
 
-        String actualRes = app.getUserHelper().getEmailRegisterLinkText(userDTO.getEmail());
+        String actualRes = app.getUserHelper().getEmailRegisterLinkText();
         System.out.println(actualRes);
         Assert.assertEquals(actualRes, email);
+
     }
 
     @Test(dataProvider = "createNewAccountCSVFile", dataProviderClass = DataProviders.class)
 
     public void positiveCreateNewAccountCSV(UserDTO userDTO){
-        app.getUserHelper().clickLoginOnNavBar();
+        app.getUserHelper().clickRegisterLink();
         app.getUserHelper().newRegister(userDTO);
         app.getUserHelper().pause(2000);
 
-        Assert.assertTrue(Boolean.parseBoolean(app.getUserHelper().getEmailRegisterLinkText(userDTO.getEmail())));
+        String actualRes = app.getUserHelper().getEmailRegisterLinkText();
+        System.out.println(actualRes);
+        Assert.assertEquals(actualRes, userDTO.getEmail());
     }
 }
