@@ -1,11 +1,16 @@
 package tests.hws.helpers;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import com.google.common.io.Files;
+import org.openqa.selenium.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.io.IOException;
 
 public class BaseHelper {
     WebDriver driver;
+    static Logger logger = LoggerFactory.getLogger(BaseHelper.class);
     public BaseHelper(WebDriver driver) {
         this.driver = driver;
     }
@@ -35,5 +40,18 @@ public class BaseHelper {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public  String takeScreenshot(){
+        logger.info("start screenshot");
+        File tmp  = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File screenshot = new File("screenshots/screen" + System.currentTimeMillis()
+                +".png");
+        try {
+            Files.copy(tmp, screenshot);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return screenshot.getPath();
     }
 }

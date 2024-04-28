@@ -2,6 +2,7 @@ package tests.hws.helpers;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import tests.hws.dto.UserDTO;
 
 public class UserHelper extends BaseHelper{
@@ -11,9 +12,15 @@ public class UserHelper extends BaseHelper{
     By btnLogout = By.xpath("//a[contains(text(),'Log out')]");
     By linkRegister = By.xpath("//a[@href='/register']");
     By emailRegisterLink = By.xpath("//div[@class='header-links-wrapper']//a[@class='account']");
+    By btnLogIn = By.xpath("//a[contains(text(),'Log in')]");
     public void clickLogoutBtn() {
         clickBase(btnLogout);
     }
+    public void clickLoginOnNavBar() {
+       clickBase(btnLogIn);
+    }
+
+    //registration------------
     public void clickRegisterLink(){
         clickBase(linkRegister);
     }
@@ -44,9 +51,37 @@ public class UserHelper extends BaseHelper{
         driver.findElement(By.xpath("//input[@name='register-button']")).click();
     }
 
-
     public String getEmailRegisterLinkText() {
         return getTextBaseByLocator(emailRegisterLink);
     }
+    //------------------------------
+    // Login-----------------
+
+    public void login(UserDTO user) {
+        fillEmailOnLogin(user.getEmail());
+        fillPasswordOnLogin(user.getPassword());
+        clickLoginBtn();
+    }
+
+    public void fillPasswordOnLogin(String password) {
+        WebElement inputPassword = driver.findElement(By
+                .xpath("//input[@id='Password']"));
+        inputPassword.click();
+        inputPassword.clear();
+        inputPassword.sendKeys(password);
+    }
+
+    public void fillEmailOnLogin(String email) {
+        WebElement inputEmail = driver.findElement(By
+                .xpath("//input[@id='Email']"));
+        inputEmail.click();
+        inputEmail.clear();
+        inputEmail.sendKeys(email);
+    }
+    public void clickLoginBtn() {
+        driver.findElement(By.xpath("//input[@class='button-1 login-button']")).click();
+    }
+
+
 
 }
