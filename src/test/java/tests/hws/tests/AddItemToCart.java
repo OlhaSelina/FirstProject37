@@ -1,10 +1,9 @@
 package tests.hws.tests;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class AddItemToCart extends BaseTest {
@@ -23,5 +22,15 @@ public class AddItemToCart extends BaseTest {
     @Test
     public void addItemToCart() {
         app.getItemHelper().clickAddItemToCard();
+        app.getItemHelper().pause(1500);
+        app.getItemHelper().closeAllert();
+        app.getItemHelper().pause(2000);
+        app.getItemHelper().clickShoppingCart();
+
+
+        Assert.assertEquals(
+                app.getDriver().findElement(
+                        By.xpath("//a[@class='product-name']")).getText().trim(), "14.1-inch Laptop");
+
     }
 }

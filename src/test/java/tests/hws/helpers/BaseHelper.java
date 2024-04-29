@@ -54,4 +54,8 @@ public class BaseHelper {
         }
         return screenshot.getPath();
     }
+
+    protected String getTextBaseByElement(WebElement el) {
+        return el.getText().trim();
+    }
 }
